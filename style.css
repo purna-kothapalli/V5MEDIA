@@ -698,7 +698,7 @@ ul { list-style: none; }
 .form-success p { color: #15803d; font-size: 13px; margin: 0; line-height: 1.5; }
 
 /* ===== FOOTER ===== */
-.footer { background: #0a192f; color: #fff; padding: 100px 0 40px; }
+.footer { background: #0a192f; color: #fff; padding: 100px 0 100px; }
 .footer-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
