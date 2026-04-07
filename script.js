@@ -190,3 +190,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// ===== WHY CHOOSE US CAROUSEL DOTS =====
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.querySelector('.why-grid');
+  const dotsContainer = document.querySelector('.why-dots');
+  
+  if (grid && dotsContainer) {
+    const cards = grid.querySelectorAll('.why-card');
+    
+    // Create dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => {
+        grid.scrollTo({
+          left: cards[i].offsetLeft,
+          behavior: 'smooth'
+        });
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    // Update active dot on scroll
+    grid.addEventListener('scroll', () => {
+      const scrollIndex = Math.round(grid.scrollLeft / grid.offsetWidth);
+      const dots = dotsContainer.querySelectorAll('.dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === scrollIndex);
+      });
+    });
+  }
+});
