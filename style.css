@@ -829,25 +829,38 @@ ul { list-style: none; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .btn-primary, .btn-secondary { text-align: center; }
   .courses-grid, .why-grid, .testimonials-grid { grid-template-columns: 1fr; }
-  .t-tilted { transform: none; }
-  .testimonial-card { min-width: 100%; }
+  .t-tilted { transform: none !important; }
+  .t-card { min-width: 100%; padding: 30px 20px; }
+  .t-text { font-size: 13px; line-height: 1.6; }
   .footer-grid { grid-template-columns: 1fr; text-align: center;}
   .footer-brand .footer-logo, .footer-links-col ul, .guarantee-badge { justify-content: center; margin: 0 auto 16px;}
   .form-row { grid-template-columns: 1fr; }
-  .section { padding: 60px 0; }
-  .hero-title-v5 { font-size: 40px; }
-  .hero-title-school { font-size: 20px;}
+  .hero-title-main { font-size: clamp(32px, 8vw, 42px); }
+  .hero-title-school { font-size: clamp(18px, 4vw, 22px); }
+  .section { padding: 50px 0; }
+  .container { padding: 0 20px; }
 
   /* Mobile Dropdown */
   .nav-dropdown > .nav-link svg { margin-left: auto; transition: 0.3s; }
   .nav-dropdown.active > .nav-link svg { transform: rotate(180deg); }
   .nav-dropdown.active > .dropdown-menu { display: block; opacity: 1; visibility: visible; transform: none; position: static; box-shadow: none; padding-left: 20px; border: none;}
-  .dropdown-menu { display: none; width: 100%; transition: none; }
+  .dropdown-menu { display: none; width: 100%; transition: none; padding-top: 10px; }
 }
 
-/* ========================================================= */
-/* ===== COURSE TEMPLATE PAGE STYLES ===== */
-/* ========================================================= */
+@media (max-width: 480px) {
+  .hero-title-main { font-size: 32px; }
+  .hero-tagline { font-size: 15px; }
+  .hero-bullets li { font-size: 14px; }
+  .bento-tile { padding: 20px; }
+  .bento-content h4 { font-size: 16px; }
+  .bento-content p { font-size: 12px; }
+  .benefits-ribbon { padding: 25px 0; }
+  .benefit-item { min-width: 110px; }
+  .c-modules { padding: 60px 20px; }
+  .c-sec-header h2 { font-size: 28px; }
+  .price-new { font-size: 32px; }
+  .course-form-card { padding: 24px; }
+}
 
 .course-page-body { background: #fafcff; }
 
@@ -989,6 +1002,17 @@ ul { list-style: none; }
   line-height: 1.4;
   margin: 0;
   white-space: normal;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .c-strip-container { 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px; 
+    padding: 24px;
+    text-align: center;
+  }
 }
 
 /* FADE EFFECT FOR SCROLLING */
@@ -1018,7 +1042,8 @@ ul { list-style: none; }
   .benefits-grid {
     justify-content: flex-start;
     padding-bottom: 5px;
-    gap: 40px; /* More breathing room between items */
+    gap: 40px; 
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
   }
   .benefit-item {
     min-width: 130px;
