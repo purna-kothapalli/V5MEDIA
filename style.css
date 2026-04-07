@@ -931,3 +931,112 @@ ul { list-style: none; }
   .c-strip-container { flex-direction: column; align-items: flex-start; }
 }
 
+/* ===== COURSE BENEFITS RIBBON (Inspired by Reference) ===== */
+.benefits-ribbon {
+  background: linear-gradient(90deg, #20c997, #17a589);
+  padding: 40px 24px;
+  margin: 60px 0;
+  border-radius: 24px;
+}
+.benefits-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 32px;
+  text-align: center;
+}
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.benefit-icon-container {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+.benefit-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+/* Pricing Card (Inspired by Reference) */
+.course-pricing-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+  border: 1px solid #f0f0f0;
+  margin-top: 40px;
+  text-align: left;
+}
+.price-heading { font-size: 14px; color: #777; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+.price-wrap { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; }
+.price-new { font-size: 42px; font-weight: 900; color: var(--blue-primary); }
+.price-old { font-size: 20px; color: #999; text-decoration: line-through; }
+.price-cta {
+  display: block; width: 100%; padding: 20px;
+  background: #20c997; color: #fff;
+  text-align: center; font-weight: 800; font-size: 18px;
+  border-radius: 12px; transition: 0.3s;
+}
+.price-cta:hover { background: #17a589; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(32, 201, 151, 0.2); color: #fff;}
+
+/* ===== FAQ SECTION (Detailed Design) ===== */
+.faq-section { padding: 100px 24px; background: #fff; position: relative; overflow: hidden; }
+/* Horizontal separator */
+.faq-section::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: #eee; }
+
+.faq-dots-bg {
+  position: absolute; top: 40px; left: 40px;
+  width: 120px; height: 120px;
+  background-image: radial-gradient(#d1d1d1 2px, transparent 2px);
+  background-size: 20px 20px;
+  z-index: 1; opacity: 0.5;
+}
+.faq-container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+.faq-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(32px, 4vw, 42px);
+  font-weight: 900; color: #111;
+  text-align: center; margin-bottom: 60px;
+}
+.faq-title span { color: var(--red); }
+
+.faq-item { border-bottom: 1px solid #eee; transition: 0.3s; }
+.faq-question {
+  width: 100%; padding: 32px 0; border: none; background: none;
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; text-align: left; font-size: 20px; font-weight: 700; color: #333;
+}
+.faq-item:hover .faq-question { color: var(--red); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0, 1, 0, 1);
+}
+.faq-answer-content { padding: 0 0 32px 0; color: #666; font-size: 17px; line-height: 1.6; }
+.faq-item.active .faq-answer { max-height: 1000px; transition: all 0.4s cubic-bezier(1, 0, 1, 0); }
+.faq-item.active .faq-question { color: var(--red); }
+
+/* The Plus/Minus Icon */
+.plus-icon { position: relative; width: 24px; height: 24px; transition: 0.4s; }
+.plus-icon::before, .plus-icon::after {
+  content: ""; position: absolute; background: currentColor; top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.plus-icon::before { width: 14px; height: 2px; }
+.plus-icon::after { width: 2px; height: 14px; }
+.faq-item.active .plus-icon { transform: rotate(45deg); color: var(--red); }
+
