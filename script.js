@@ -190,21 +190,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ===== WHY CHOOSE US CAROUSEL DOTS =====
-document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.querySelector('.why-grid');
-  const dotsContainer = document.querySelector('.why-dots');
+// ===== CAROUSEL DOTS HELPER =====
+function initCarousel(gridSelector, dotsSelector, cardSelector) {
+  const grid = document.querySelector(gridSelector);
+  const dotsContainer = document.querySelector(dotsSelector);
   
   if (grid && dotsContainer) {
-    const cards = grid.querySelectorAll('.why-card');
-    
+    const cards = grid.querySelectorAll(cardSelector);
+    if (cards.length === 0) return;
+
     // Create dots
     cards.forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'dot' + (i === 0 ? ' active' : '');
       dot.addEventListener('click', () => {
         grid.scrollTo({
-          left: cards[i].offsetLeft,
+          left: cards[i].offsetLeft - grid.offsetLeft,
           behavior: 'smooth'
         });
       });
@@ -213,11 +214,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update active dot on scroll
     grid.addEventListener('scroll', () => {
-      const scrollIndex = Math.round(grid.scrollLeft / grid.offsetWidth);
+      const cardWidth = cards[0].offsetWidth + parseInt(window.getComputedStyle(grid).gap || 0);
+      const scrollIndex = Math.round(grid.scrollLeft / cardWidth);
       const dots = dotsContainer.querySelectorAll('.dot');
       dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === scrollIndex);
       });
     });
   }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initCarousel('.why-grid', '.why-dots', '.why-card');
+  initCarousel('.testimonials-viewport', '.testimonial-dots', '.t-card');
+
+  // Auto-scroll logic for testimonials
+  const testGrid = document.querySelector('.testimonials-viewport');
+  let testScrollerInterval;
+  
+  if (testGrid) {
+    const startTestScroll = () => {
+      testScrollerInterval = setInterval(() => {
+        // Only auto-scroll if it's actually scrollable (mobile carousel mode)
+        if (testGrid.scrollWidth <= testGrid.clientWidth) return;
+        
+        const cards = testGrid.querySelectorAll('.t-card');
+        if (!cards.length) return;
+        const cardWidth = cards[0].offsetWidth + parseInt(window.getComputedStyle(testGrid.querySelector('.testimonials-track')).gap || 16);
+        
+        // If reached the end, go back to start
+        if (testGrid.scrollLeft + testGrid.clientWidth >= testGrid.scrollWidth - 10) {
+          testGrid.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          testGrid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        }
+      }, 2500); // 2.5 seconds
+    };
+
+    startTestScroll();
+
+    // Pause on hover or touch
+    testGrid.addEventListener('mouseenter', () => clearInterval(testScrollerInterval));
+    testGrid.addEventListener('mouseleave', startTestScroll);
+    testGrid.addEventListener('touchstart', () => clearInterval(testScrollerInterval));
+    testGrid.addEventListener('touchend', startTestScroll);
+  }
+
+  // Add arrow event listeners for Why Choose Us carousel
+  const whyGrid = document.querySelector('.why-grid');
+  const whyPrev = document.getElementById('why-prev');
+  const whyNext = document.getElementById('why-next');
+  if (whyGrid && whyPrev && whyNext) {
+    whyPrev.addEventListener('click', () => {
+      const cardWidth = whyGrid.querySelector('.why-card').offsetWidth + parseInt(window.getComputedStyle(whyGrid).gap || 0) || 300;
+      whyGrid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    });
+    whyNext.addEventListener('click', () => {
+      const cardWidth = whyGrid.querySelector('.why-card').offsetWidth + parseInt(window.getComputedStyle(whyGrid).gap || 0) || 300;
+      whyGrid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    });
+  }
 });
+
