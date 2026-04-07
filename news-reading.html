@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Details | V5 Media School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=4" />
+</head>
+<body class="course-page-body">
+
+  <!-- NAVBAR COPY (Pre-Scrolled for nested pages) -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-badge">V5</div>
+        <div class="logo-text">
+          <span class="logo-main">V5 MEDIA</span>
+          <span class="logo-sub">SCHOOL</span>
+        </div>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#home" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li class="nav-dropdown" id="nav-courses">
+          <a href="index.html#courses" class="nav-link">Courses <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="dropdown-menu">
+            <a href="news-reading.html" class="dropdown-item">News Reading & Anchoring</a>
+            <a href="reporting-journalism.html" class="dropdown-item">Reporting & Journalism</a>
+            <a href="camera-lighting.html" class="dropdown-item">Camera & Lighting</a>
+            <a href="video-editing.html" class="dropdown-item">Video Editing & VFX</a>
+            <a href="digital-media.html" class="dropdown-item">Digital Media & PR</a>
+          </div>
+        </li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta" id="nav-enroll-btn">Enroll Now</a>
+    </div>
+  </nav>
+
+  <!-- COURSE HERO BLOCK -->
+  <header class="course-hero">
+    <div class="course-hero-content">
+      <div class="ch-left">
+        <div class="ch-bread"><a href="index.html">Home</a> / Course / News Reading</div>
+        <h1 class="ch-title">News Reading & <span>Anchoring</span></h1>
+        <p class="ch-desc">Master the art of broadcasting. Learn how to present news with confidence, manage teleprompters effortlessly, and develop the powerful voice modulation required for prime-time television.</p>
+        
+        <div class="ch-bullets">
+          <div class="ch-bullet">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            90 Days Intensive Training
+          </div>
+          <div class="ch-bullet">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Real Studio Environment Practice
+          </div>
+          <div class="ch-bullet">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            100% Guaranteed Job Placement
+          </div>
+        </div>
+        
+        <div class="ch-action">
+          <a href="#" class="ch-btn-download">Download Syllabus ↓</a>
+        </div>
+      </div>
+      
+      <!-- Right Side Form Card (From Reference Screenshot) -->
+      <div class="ch-right">
+        <div class="course-form-card">
+          <h3>Request a Callback</h3>
+          <p>Drop your details to get full course info!</p>
+          <form class="ch-form">
+            <div class="form-group">
+                <input type="text" placeholder="Your Full Name*" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" placeholder="Mobile Number*" required>
+            </div>
+            <button type="submit" class="ch-form-btn">Submit Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HIGHLIGHT/ICON STRIP -->
+  <div class="c-strip">
+    <div class="c-strip-container">
+        <div class="c-strip-item">
+            <div class="c-strip-icon">🎙️</div>
+            <div class="c-strip-text">Real Studio Practice</div>
+        </div>
+        <div class="c-strip-item">
+            <div class="c-strip-icon">🗣️</div>
+            <div class="c-strip-text">Voice Modulation</div>
+        </div>
+        <div class="c-strip-item">
+            <div class="c-strip-icon">📹</div>
+            <div class="c-strip-text">Camera Facing</div>
+        </div>
+        <div class="c-strip-item">
+            <div class="c-strip-icon">📝</div>
+            <div class="c-strip-text">Script Writing</div>
+        </div>
+    </div>
+  </div>
+
+  <!-- MODULES INFO GRID (Dotted Reference Style) -->
+  <section class="c-modules">
+    <div class="c-container">
+      <div class="c-sec-header">
+        <h2>What You'll Learn<br><span>Core Course Modules</span></h2>
+        <p>A comprehensive step-by-step curriculum to make you broadcast-ready.</p>
+      </div>
+
+      <div class="c-grid">
+        <!-- Module Card 1 -->
+        <div class="c-card">
+          <!-- The visual dotted accents from the reference screenshot -->
+          <div class="dotted-bubble dot-top-left"></div>
+          <h4>1. Teleprompter Mastery</h4>
+          <p>Learn to read smoothly while maintaining eye contact with the camera. Overcome hesitation and build unbreakable flow for non-stop live feeds.</p>
+        </div>
+
+        <!-- Module Card 2 -->
+        <div class="c-card">
+          <div class="dotted-bubble dot-bottom-right"></div>
+          <h4>2. Voice Modulation & Tone</h4>
+          <p>Understand how to inflect your voice for breaking news vs. standard broadcasts. Control pitch, breathing, and pacing perfectly under pressure.</p>
+        </div>
+
+        <!-- Module Card 3 -->
+        <div class="c-card">
+          <div class="dotted-bubble dot-top-right"></div>
+          <h4>3. Live Reporting Simulation</h4>
+          <p>Roleplay dropping into live feeds. Learn to speak unscripted, take cues intelligently from the gallery, and handle live technical errors gracefully.</p>
+        </div>
+
+        <!-- Module Card 4 -->
+        <div class="c-card">
+          <div class="dotted-bubble dot-bottom-left"></div>
+          <h4>4. Studio Interviewing</h4>
+          <p>Techniques for co-anchoring, moderating multi-person debates, reading body language, and conducting hard-hitting 1-on-1 studio interviews.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORS / FACULTY SECTION -->
+  <section class="c-mentors">
+    <div class="c-container">
+      <div class="c-sec-header">
+        <h2>Learn From TV Veterans<br><span>Your Mentors</span></h2>
+      </div>
+      
+      <div class="mentor-grid">
+        <div class="mentor-card">
+           <div class="mentor-img-wrapper">
+             <img src="ceo_portrait.png" alt="Senior Mentor">
+           </div>
+           <div class="mentor-info">
+             <h5>Mr. Rajeev Kumar</h5>
+             <span>Senior News Anchor</span>
+             <p>Rajeev has anchored prime-time television for over 15 years, covering global breaking news across major networks.</p>
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER COPY -->
+  <footer class="footer pb-0" id="contact" style="padding-bottom: 24px;">
+    <!-- Simple copy for template layout. Replace with full footer if needed. -->
+    <div style="text-align: center; color: var(--text-secondary); padding: 40px; font-weight: 500;">
+        <p>&copy; 2025 V5 Media School. A V5 News Initiative.</p>
+    </div>
+  </footer>
+
+  <script src="script.js?v=4"></script>
+</body>
+</html>

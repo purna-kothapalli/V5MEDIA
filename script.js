@@ -80,34 +80,37 @@ document.querySelectorAll('.hero-stats, .about-dark-panel').forEach(section => {
 
 
 // ===== CONTACT FORM =====
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submit-btn');
-  const btnText = btn.querySelector('.btn-text');
-  const btnLoader = btn.querySelector('.btn-loader');
-  const success = document.getElementById('form-success');
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const btnText = btn.querySelector('.btn-text');
+    const btnLoader = btn.querySelector('.btn-loader');
+    const success = document.getElementById('form-success');
 
-  // Validation
-  const name = document.getElementById('full-name').value.trim();
-  const phone = document.getElementById('phone-number').value.trim();
-  const course = document.getElementById('course-select').value;
-  const terms = document.getElementById('terms-check').checked;
+    // Validation
+    const name = document.getElementById('full-name').value.trim();
+    const phone = document.getElementById('phone-number').value.trim();
+    const course = document.getElementById('course-select').value;
+    const terms = document.getElementById('terms-check').checked;
 
-  if (!name || !phone || !course || !terms) {
-    alert('Please fill in all required fields and accept the terms.');
-    return;
-  }
+    if (!name || !phone || !course || !terms) {
+      alert('Please fill in all required fields and accept the terms.');
+      return;
+    }
 
-  btnText.style.display = 'none';
-  btnLoader.style.display = 'inline';
-  btn.disabled = true;
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'inline';
+    btn.disabled = true;
 
-  setTimeout(() => {
-    btn.style.display = 'none';
-    success.style.display = 'flex';
-    this.reset();
-  }, 1500);
-});
+    setTimeout(() => {
+      btn.style.display = 'none';
+      success.style.display = 'flex';
+      this.reset();
+    }, 1500);
+  });
+}
 
 // ===== SMOOTH ACTIVE NAV =====
 const sections = document.querySelectorAll('section[id]');
@@ -115,9 +118,9 @@ const navObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       document.querySelectorAll('.nav-link').forEach(link => {
-        link.style.color = '';
+        link.classList.remove('active');
         if (link.getAttribute('href') === '#' + entry.target.id) {
-          link.style.color = '#fff';
+          link.classList.add('active');
         }
       });
     }
@@ -141,9 +144,25 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 }, revealOptions);
 
 // Initialize reveal animations
-document.addEventListener('DOMContentLoaded', () => {
+const initReveals = () => {
   document.querySelectorAll('.reveal').forEach(el => {
     revealObserver.observe(el);
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initReveals);
+} else {
+  initReveals();
+}
+
+// Mobile Dropdown Toggle
+document.querySelectorAll('.nav-dropdown > .nav-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      link.parentElement.classList.toggle('active');
+    }
   });
 });
 

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
 
@@ -43,12 +43,21 @@
         </div>
       </div>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#courses" class="nav-link">Courses</a></li>
-        <li><a href="#why-us" class="nav-link">Why Us</a></li>
-        <li><a href="#ceo" class="nav-link">CEO</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="index.html#home" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li class="nav-dropdown" id="nav-courses">
+          <a href="index.html#courses" class="nav-link">Courses <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="dropdown-menu">
+            <a href="news-reading.html" class="dropdown-item">News Reading & Anchoring</a>
+            <a href="reporting-journalism.html" class="dropdown-item">Reporting & Journalism</a>
+            <a href="camera-lighting.html" class="dropdown-item">Camera & Lighting</a>
+            <a href="video-editing.html" class="dropdown-item">Video Editing & VFX</a>
+            <a href="digital-media.html" class="dropdown-item">Digital Media & PR</a>
+          </div>
+        </li>
+        <li><a href="index.html#why-us" class="nav-link">Why Us</a></li>
+        <li><a href="index.html#ceo" class="nav-link">CEO</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
       </ul>
       <a href="#contact" class="nav-cta" id="nav-enroll-btn">Enroll Now</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -168,39 +177,69 @@
 
 
   <!-- ===== ABOUT SECTION ===== -->
-  <section class="about-ref-section" id="about">
-    <div class="about-ref-fluid">
-      <div class="about-ref-grid">
-        <div class="about-ref-content reveal reveal-up">
-          <div class="about-ref-tag">About V5 Media 👋</div>
-          <h2 class="about-ref-title">Get training and<br>Placement.</h2>
-          <p class="about-ref-desc">Our mission is to transform aspiring individuals into broadcast-ready media professionals through intensive, hands-on training backed by India's fastest-growing news network.</p>
+  <!-- ===== ABOUT SECTION (ACFM Layout) ===== -->
+  <section class="about-acfm-section" id="about">
+    <div class="container">
+      
+      <!-- Centered Header -->
+      <div class="acfm-header reveal reveal-up">
+        <div class="acfm-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="10"/></svg>
+          Who We Are
+        </div>
+        <h2 class="acfm-title">INDIA'S PREMIER MEDIA SCHOOL FOR<br>BROADCASTING & JOURNALISM</h2>
+      </div>
+
+      <!-- 2 Column Grid -->
+      <div class="acfm-grid">
+        
+        <!-- Left Column -->
+        <div class="acfm-left reveal reveal-left delay-100">
           
-          <div class="about-ref-stats">
-            <div class="ref-stat-item reveal reveal-up delay-100">
-              <h3>100% <span>/ Placement</span></h3>
-              <p>Unmatched career support until you land a job.</p>
+          <!-- Stats Array -->
+          <div class="acfm-stats-box">
+            <div class="acfm-stat-item">
+              <div class="stat-top-line"></div>
+              <h3>100%</h3>
+              <p>Placement Guaranteed</p>
             </div>
-            <div class="ref-stat-item reveal reveal-up delay-200">
-              <h3>90+ <span>/ Days</span></h3>
-              <p>Intensive hands-on training in real studios.</p>
+            <div class="acfm-stat-item">
+              <div class="stat-top-line green-line"></div>
+              <h3>90+</h3>
+              <p>Days Intensive Training</p>
             </div>
-            <div class="ref-stat-item reveal reveal-up delay-300">
-              <h3>Free <span>/ Amenities</span></h3>
-              <p>Food and stay provided during your training.</p>
+            <div class="acfm-stat-item">
+               <div class="stat-top-line blue-line"></div>
+               <h3>Free</h3>
+               <p>Food & Accommodation</p>
             </div>
-            <div class="ref-stat-item reveal reveal-up delay-400">
-              <h3>5+ <span>/ Courses</span></h3>
-              <p>Professional curriculum designed by experts.</p>
+            <div class="acfm-stat-item">
+               <div class="stat-top-line orange-line"></div>
+               <h3>5+</h3>
+               <p>Professional Courses</p>
             </div>
           </div>
           
-          <a href="#courses" class="ref-btn reveal reveal-up delay-500">Learn More &rarr;</a>
+          <!-- Describe Paragraph -->
+          <p class="acfm-desc">Our mission is to transform aspiring individuals into broadcast-ready media professionals through intensive, hands-on training backed by V5 News network. Train in a real newsroom and launch your career with confidence.</p>
+          
+          <!-- CTA Button -->
+          <a href="#courses" class="acfm-btn">Explore V5 Media</a>
+        </div>
+
+        <!-- Right Column -->
+        <div class="acfm-right reveal reveal-scale delay-200">
+          <div class="acfm-video-card">
+            <img src="about_success.png" alt="V5 Media Students Learning">
+            <button class="acfm-play-btn" aria-label="Play Intro">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="acfm-video-label">
+              <span>&#9654; Tour Our Studio</span>
+            </div>
+          </div>
         </div>
         
-        <div class="about-ref-image reveal reveal-scale delay-200">
-          <img src="about_success.png" alt="V5 Media Students Learning">
-        </div>
       </div>
     </div>
   </section>
@@ -787,6 +826,6 @@
     </a>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
