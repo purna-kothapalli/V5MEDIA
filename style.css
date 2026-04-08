@@ -312,9 +312,11 @@ ul {
 /* ===== HERO ===== */
 .hero {
   padding: 80px 24px;
-  background: radial-gradient(circle at 20% 30%, rgba(32, 201, 151, 0.1), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(211, 47, 47, 0.05), transparent 40%),
-    linear-gradient(-45deg, #0a0721, #0a2540, #113458, #142942);
+  background: 
+    radial-gradient(ellipse 70% 60% at 10% 50%, rgba(0, 212, 255, 0.20) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 50%, rgba(99, 102, 241, 0.20) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(26, 58, 143, 0.35) 0%, transparent 60%),
+    linear-gradient(160deg, #06060f 0%, #0b0e22 50%, #06060f 100%);
   background-size: 400% 400%;
   animation: gradientBG 25s ease infinite;
   min-height: calc(100vh - 116px);
@@ -1440,9 +1442,17 @@ ul {
 
 .ceo-grid {
   display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 80px;
+  grid-template-columns: 320px 1fr;
+  gap: 60px;
   align-items: flex-start;
+}
+
+@media (max-width: 992px) {
+  .ceo-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
 }
 
 .ceo-image-wrap {
@@ -1467,22 +1477,22 @@ ul {
 
 .ceo-badge-card {
   position: absolute;
-  bottom: -20px;
-  right: -20px;
+  bottom: -15px;
+  right: -10px;
   z-index: 5;
   background: var(--blue-primary);
   color: #fff;
-  border-radius: 12px;
-  padding: 16px 24px;
+  border-radius: 10px;
+  padding: 10px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 15px 30px rgba(10, 37, 64, 0.2);
+  box-shadow: 0 10px 20px rgba(10, 37, 64, 0.2);
 }
 
 .ceo-badge-title {
   font-weight: 800;
-  font-size: 20px;
+  font-size: 16px;
   color: #fff;
 }
 
@@ -1505,19 +1515,36 @@ ul {
 .ceo-role {
   color: var(--red);
   font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 32px;
+  font-size: 15px;
+  margin-bottom: 24px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
+@media (max-width: 768px) {
+  .ceo-name {
+    font-size: 32px;
+  }
+  .ceo-role {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+}
+
 .ceo-quote-wrap {
   position: relative;
-  padding: 40px;
+  padding: 30px;
   background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-  margin-bottom: 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .ceo-quote-wrap {
+    padding: 24px;
+    text-align: left;
+  }
 }
 
 .quote-svg-bg {
@@ -1555,9 +1582,21 @@ ul {
 
 .ceo-achievements {
   display: flex;
-  gap: 48px;
-  padding-top: 32px;
+  gap: 32px;
+  padding-top: 24px;
   border-top: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .ceo-achievements {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+  }
+  .achievement {
+    text-align: center;
+  }
 }
 
 .achievement {
