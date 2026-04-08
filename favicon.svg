@@ -1,0 +1,6 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rounded red background -->
+  <rect width="64" height="64" rx="10" fill="#e31c24"/>
+  <!-- Bold V5 Text -->
+  <text x="32" y="44" font-family="Montserrat, sans-serif" font-weight="900" font-size="34" fill="white" text-anchor="middle">V5</text>
+</svg>
