@@ -662,7 +662,7 @@ ul { list-style: none; }
 }
 .t-title { font-family: 'Montserrat', sans-serif; font-size: clamp(32px, 4vw, 42px); font-weight: 800; color: #111; margin-bottom: 12px; }
 .testimonials-viewport { overflow: hidden; width: 100%; padding: 20px 0; }
-.testimonials-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch;}
+.testimonials-track { display: flex; width: max-content; gap: 24px; }
 
 .t-card {
   background: #fff;
@@ -672,7 +672,8 @@ ul { list-style: none; }
   text-align: center;
   box-shadow: 0 10px 40px rgba(0,0,0,0.04);
   transition: var(--transition);
-  height: 100%;
+  height: auto;
+  flex: 0 0 380px;
 }
 .t-card:hover { transform: translateY(-4px); box-shadow: 0 15px 45px rgba(0,0,0,0.08); }
 
@@ -692,7 +693,8 @@ ul { list-style: none; }
 .t-avatar-img { width: 100%; height: 100%; object-fit: cover; }
 
 .t-name { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 800; color: #222; margin-bottom: 4px; }
-.t-handle { color: #888; font-size: 12px; margin-bottom: 20px; font-weight: 500; }
+.t-handle { color: #888; font-size: 12px; margin-bottom: 8px; font-weight: 500; }
+.t-stars { display: flex; gap: 2px; justify-content: center; margin-bottom: 20px; }
 .t-text { color: #555; font-size: 15px; line-height: 1.6; margin-bottom: 24px; flex-grow: 1; }
 
 .t-quote-icon { display: flex; align-items: center; justify-content: center; margin-top: auto; }
@@ -971,6 +973,8 @@ ul { list-style: none; }
   .form-row { grid-template-columns: 1fr; }
   .hero-title-main { font-size: clamp(32px, 8vw, 42px); }
   .hero-title-school { font-size: clamp(18px, 4vw, 22px); }
+  .hero-bento-grid { grid-template-columns: 1fr; }
+  .bento-wide { grid-column: auto; }
   .section { padding: 50px 0; }
   .container { padding: 0 20px; }
 
@@ -1167,35 +1171,33 @@ ul { list-style: none; }
 
 @media (max-width: 992px) {
   .benefits-ribbon {
-    padding: 30px 16px;
-    border-radius: 0; /* Full width on mobile for cleaner look */
-    margin: 30px 0;
+    padding: 32px 16px;
+    border-radius: 20px;
+    margin: 30px auto;
+    width: 92%;
   }
-  .benefits-ribbon::after { opacity: 0.8; } /* Show fade on mobile */
+  .benefits-ribbon::after { display: none; }
   
   .benefits-grid {
-    justify-content: flex-start;
-    padding-bottom: 5px;
-    gap: 40px; 
-    -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 0;
+    gap: 32px 16px;
+    overflow-x: hidden;
   }
   .benefit-item {
-    min-width: 130px;
-    flex: 0 0 auto;
+    min-width: 0 !important;
+    flex: 0 0 calc(50% - 8px);
     gap: 12px;
   }
-  .benefit-icon-box {
-    width: 42px;
-    height: 42px;
-  }
-  .benefit-icon-box svg {
-    width: 34px;
-    height: 34px;
-  }
-  .benefit-text {
-    font-size: 9.5px; /* Neater on small screens */
-    letter-spacing: 0.2px;
-  }
+}
+
+@media (max-width: 480px) {
+  .benefits-ribbon { padding: 24px 12px; border-radius: 16px; width: 95%; }
+  .benefit-item { gap: 8px; flex: 0 0 calc(50% - 8px); }
+  .benefit-icon-box { width: 44px; height: 44px; }
+  .benefit-icon-box svg { width: 32px; height: 32px; }
+  .benefit-text { font-size: 10px; letter-spacing: 0.2px; }
 }
 
 
@@ -1410,3 +1412,187 @@ ul { list-style: none; }
 
 
 
+
+/* ===== FORM VALIDATION STYLES ===== */
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+    border-color: #ff4d4f !important;
+    background-color: #fff2f0;
+}
+
+.error-message {
+    color: #ff4d4f;
+    font-size: 11px;
+    margin-top: 4px;
+    display: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.form-group.error .error-message {
+    display: block;
+}
+
+
+.form-check.error label {
+    color: #ff4d4f;
+    font-weight: 600;
+}
+
+/* ===== PLACEMENT PARTNERS SECTION ===== */
+.placement-section {
+    padding: 100px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.placement-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 900;
+    margin-bottom: 60px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.placement-title span {
+    color: var(--teal);
+    position: relative;
+    display: inline-block;
+}
+
+.placement-title span::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 4px;
+    background: var(--teal);
+    border-radius: 2px;
+}
+
+.placement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.placement-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
+
+.placement-card:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    border-color: var(--teal);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transform: translateY(-5px);
+}
+
+.company-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+/* Footer Social Icons Update */
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.footer-socials a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.footer-socials a:hover {
+    background: var(--red);
+    transform: translateY(-3px);
+}
+
+.footer-socials svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+}
+
+@media (max-width: 768px) {
+    .placement-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .placement-section {
+        padding: 60px 0;
+    }
+}
+
+
+/* ===== COURSE INFO LIST (Hero Card Replacement) ===== */
+.course-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.course-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.course-info-item .info-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: #20c997;
+}
+
+.course-info-item .info-text {
+  font-size: 15px;
+  color: #555;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.price-subtext {
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+  margin-top: 12px;
+  font-family: 'Inter', sans-serif;
+}

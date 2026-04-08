@@ -27,7 +27,12 @@ hamburger.addEventListener('click', () => {
 });
 // Close nav on link click
 navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
+  link.addEventListener('click', (e) => {
+    // Prevent the menu from closing if clicking the dropdown toggle on mobile
+    if (window.innerWidth <= 768 && link.classList.contains('nav-link') && link.parentElement.classList.contains('nav-dropdown')) {
+      return;
+    }
+    
     navLinks.classList.remove('open');
     hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
   });
@@ -79,7 +84,18 @@ document.querySelectorAll('.hero-stats, .about-dark-panel').forEach(section => {
 });
 
 
-// ===== CONTACT FORM =====
+// ===== EMAILJS CONFIGURATION (Primary: Internal Notifications) =====
+const NOTIF_SERVICE_ID = 'service_imjfbzy';
+const NOTIF_TEMPLATE_ADMISSION = 'template_1k2lr6r';
+const NOTIF_TEMPLATE_ENQUIRY = 'template_zor0w5x';
+
+// ===== EMAILJS CONFIGURATION (Secondary: User Auto-Replies) =====
+const AUTO_SERVICE_ID = 'service_xnhurja';
+const AUTO_PUBLIC_KEY = 'tozIcCpMA9VMazNu7';
+const AUTO_TEMPLATE_ADMISSION = 'template_66jvxzp';
+const AUTO_TEMPLATE_ENQUIRY = 'template_ttz85m6';
+
+// ===== ADMISSION FORM =====
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
@@ -89,26 +105,185 @@ if (contactForm) {
     const btnLoader = btn.querySelector('.btn-loader');
     const success = document.getElementById('form-success');
 
+    // Helper to show error
+    const showError = (id, msg) => {
+      const field = document.getElementById(id);
+      const group = field.closest('.form-group') || field.parentElement;
+      group.classList.add('error');
+      let errSpan = group.querySelector('.error-message');
+      if (!errSpan) {
+        errSpan = document.createElement('span');
+        errSpan.className = 'error-message';
+        group.appendChild(errSpan);
+      }
+      errSpan.textContent = msg;
+    };
+
+    // Helper to clear all errors
+    const clearErrors = () => {
+      this.querySelectorAll('.form-group, .form-check').forEach(g => g.classList.remove('error'));
+    };
+
+    clearErrors();
+
     // Validation
     const name = document.getElementById('full-name').value.trim();
     const phone = document.getElementById('phone-number').value.trim();
+    const email = document.getElementById('email-addr').value.trim();
     const course = document.getElementById('course-select').value;
     const terms = document.getElementById('terms-check').checked;
 
-    if (!name || !phone || !course || !terms) {
-      alert('Please fill in all required fields and accept the terms.');
-      return;
+    let isValid = true;
+    if (!name) { showError('full-name', 'Name is required'); isValid = false; }
+    if (!course) { showError('course-select', 'Please select a course'); isValid = false; }
+    if (!terms) { document.getElementById('terms-check').parentElement.classList.add('error'); isValid = false; }
+    
+    // Email Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email && !emailRegex.test(email)) {
+      showError('email-addr', 'Please enter a valid email address');
+      isValid = false;
     }
+
+    // Phone Validation (10 Digits)
+    if (!phone) {
+      showError('phone-number', 'Phone number is required');
+      isValid = false;
+    } else if (phone.length !== 10) {
+      showError('phone-number', 'Please enter exactly 10 digits');
+      isValid = false;
+    }
+
+    if (!isValid) return;
 
     btnText.style.display = 'none';
     btnLoader.style.display = 'inline';
     btn.disabled = true;
 
-    setTimeout(() => {
-      btn.style.display = 'none';
-      success.style.display = 'flex';
-      this.reset();
-    }, 1500);
+    // 1. Send Notification to Admin (Primary Service)
+    emailjs.sendForm(NOTIF_SERVICE_ID, NOTIF_TEMPLATE_ADMISSION, this)
+      .then(() => {
+        // Show success UI early for responsiveness
+        btn.style.display = 'none';
+        success.style.display = 'flex';
+        // 2. Send Auto-Reply to User (Secondary Service)
+        // Must be called BEFORE this.reset() so fields aren't empty
+        emailjs.sendForm(AUTO_SERVICE_ID, AUTO_TEMPLATE_ADMISSION, this, {
+          publicKey: AUTO_PUBLIC_KEY
+        }).catch(err => console.error('Auto-Reply Error:', err));
+
+        this.reset();
+
+        // Revert to normal after 8 seconds
+        setTimeout(() => {
+          success.style.display = 'none';
+          btn.style.display = 'inline-block';
+          btnText.style.display = 'inline';
+          btnLoader.style.display = 'none';
+          btn.disabled = false;
+        }, 8000);
+      }, (error) => {
+        console.error('EmailJS Notification Error:', error);
+        alert('Oops! Something went wrong. Please try again or contact us via WhatsApp.');
+        btnText.style.display = 'inline';
+        btnLoader.style.display = 'none';
+        btn.disabled = false;
+      });
+  });
+}
+
+// ===== GENERAL ENQUIRY FORM =====
+const enquiryForm = document.getElementById('enquiry-form');
+if (enquiryForm) {
+  enquiryForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('enquiry-submit-btn');
+    const btnText = btn.querySelector('.btn-text');
+    const btnLoader = btn.querySelector('.btn-loader');
+    const success = document.getElementById('enquiry-success');
+
+    // Helper to show error
+    const showError = (id, msg) => {
+      const field = document.getElementById(id);
+      const group = field.closest('.form-group') || field.parentElement;
+      group.classList.add('error');
+      let errSpan = group.querySelector('.error-message');
+      if (!errSpan) {
+        errSpan = document.createElement('span');
+        errSpan.className = 'error-message';
+        group.appendChild(errSpan);
+      }
+      errSpan.textContent = msg;
+    };
+
+    // Helper to clear all errors
+    const clearErrors = () => {
+      this.querySelectorAll('.form-group').forEach(g => g.classList.remove('error'));
+    };
+
+    clearErrors();
+
+    // Basic Validation
+    const name = document.getElementById('enquiry-name').value.trim();
+    const email = document.getElementById('enquiry-email').value.trim();
+    const phone = document.getElementById('enquiry-phone').value.trim();
+    const message = document.getElementById('enquiry-message').value.trim();
+
+    let isValid = true;
+    if (!name) { showError('enquiry-name', 'Name is required'); isValid = false; }
+    if (!message) { showError('enquiry-message', 'Message is required'); isValid = false; }
+
+    // Email Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      showError('enquiry-email', 'Email is required');
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      showError('enquiry-email', 'Valid email is required');
+      isValid = false;
+    }
+
+    // Phone Validation (10 Digits)
+    if (phone && phone.length !== 10) {
+      showError('enquiry-phone', 'Please enter exactly 10 digits');
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'inline';
+    btn.disabled = true;
+
+    // 1. Send Notification to Admin (Primary Service)
+    emailjs.sendForm(NOTIF_SERVICE_ID, NOTIF_TEMPLATE_ENQUIRY, this)
+      .then(() => {
+        // Show success UI early
+        btn.style.display = 'none';
+        success.style.display = 'flex';
+        // 2. Send Auto-Reply to User (Secondary Service)
+        // Must be called BEFORE this.reset()
+        emailjs.sendForm(AUTO_SERVICE_ID, AUTO_TEMPLATE_ENQUIRY, this, {
+          publicKey: AUTO_PUBLIC_KEY
+        }).catch(err => console.error('Auto-Reply Error:', err));
+
+        this.reset();
+
+        // Revert to normal after 8 seconds
+        setTimeout(() => {
+          success.style.display = 'none';
+          btn.style.display = 'inline-block';
+          btnText.style.display = 'inline';
+          btnLoader.style.display = 'none';
+          btn.disabled = false;
+        }, 8000);
+      }, (error) => {
+        console.error('EmailJS Notification Error:', error);
+        alert('Failed to send details. Please try again or call us.');
+        btnText.style.display = 'inline';
+        btnLoader.style.display = 'none';
+        btn.disabled = false;
+      });
   });
 }
 
@@ -274,5 +449,25 @@ document.addEventListener('DOMContentLoaded', () => {
       whyGrid.scrollBy({ left: cardWidth, behavior: 'smooth' });
     });
   }
+
+  // --- Numeric restrictions for phone fields ---
+  const phoneFields = ['phone-number', 'enquiry-phone'];
+  phoneFields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, ''); // Numbers only
+        if (this.value.length > 10) this.value = this.value.slice(0, 10); // Cap at 10
+      });
+    }
+  });
+
+  // --- Clear errors on typing ---
+  document.querySelectorAll('input, select, textarea').forEach(input => {
+    input.addEventListener('input', () => {
+      const group = input.closest('.form-group') || input.closest('.form-check');
+      if (group) group.classList.remove('error');
+    });
+  });
 });
 
