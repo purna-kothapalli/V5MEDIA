@@ -1,4 +1,4 @@
-/* ===== RESET & BASE ===== */
+﻿/* ===== RESET & BASE ===== */
 *,
 *::before,
 *::after {
@@ -122,7 +122,6 @@ ul {
 
 /* ===== NAVBAR ===== */
 .navbar {
-  /* Set position sticky if ticker is above it in dom, or use fixed and add top-margin to body but handling ticker is easier with sticky */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -133,9 +132,36 @@ ul {
   transition: var(--transition);
 }
 
+.navbar.transparent-start {
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+}
+.navbar.transparent-start:not(.scrolled) .nav-link {
+  color: rgba(255, 255, 255, 0.9);
+}
+.navbar.transparent-start:not(.scrolled) .nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+.navbar.transparent-start:not(.scrolled) .nav-dropdown > button svg {
+  stroke: rgba(255, 255, 255, 0.9);
+}
+.navbar.transparent-start:not(.scrolled) .nav-logo img {
+  filter: brightness(0) invert(1);
+}
+.navbar.transparent-start:not(.scrolled) .nav-cta {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+.navbar.transparent-start:not(.scrolled) .nav-cta:hover {
+  background: rgba(255,255,255,0.2);
+}
+
 .navbar.scrolled {
   background: #ffffff;
   box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .nav-container {
@@ -145,7 +171,11 @@ ul {
   align-items: center;
   justify-content: space-between;
   height: 90px;
-  /* Increased to accommodate a larger logo */
+  transition: height 0.3s ease;
+}
+
+.navbar.scrolled .nav-container {
+  height: 70px;
 }
 
 .nav-logo {
@@ -162,26 +192,36 @@ ul {
 
 .nav-logo img {
   height: 90px;
-  /* Significantly upscaled to maximize branding presence */
   width: auto;
   display: block;
   object-fit: contain;
   margin-top: -25px;
-  /* Aggressive negative margin to zoom in on the logo core */
   margin-bottom: -15px;
+  transition: height 0.3s ease, margin 0.3s ease;
 }
 
 @media (max-width: 768px) {
   .nav-container {
     height: 80px;
   }
-
+  .navbar.scrolled .nav-container {
+    height: 60px;
+  }
   .nav-logo img {
     height: 70px;
     margin-top: -5px;
   }
+  .navbar.scrolled .nav-logo img {
+    height: 55px;
+    margin-top: -5px;
+  }
 }
 
+.navbar.scrolled .nav-logo img {
+  height: 70px;
+  margin-top: -15px;
+  margin-bottom: -5px;
+}
 .logo-badge,
 .logo-text {
   display: none;
@@ -311,12 +351,9 @@ ul {
 
 /* ===== HERO ===== */
 .hero {
-  padding: 80px 24px;
-  background:
-    radial-gradient(ellipse 70% 60% at 10% 50%, rgba(0, 212, 255, 0.20) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 90% 50%, rgba(99, 102, 241, 0.20) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(26, 58, 143, 0.35) 0%, transparent 60%),
-    linear-gradient(160deg, #06060f 0%, #0b0e22 50%, #06060f 100%);
+  padding: 170px 24px 80px;
+  margin-top: -90px;
+  background: linear-gradient(135deg, #0a0000 0%, #3a0000 50%, #000000 100%);
   background-size: 400% 400%;
   animation: gradientBG 25s ease infinite;
   min-height: calc(100vh - 116px);
@@ -327,18 +364,19 @@ ul {
   overflow: hidden;
 }
 
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 @keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .hero-content-wrapper {
@@ -3933,4 +3971,34 @@ ul {
   text-align: center;
   margin-top: 12px;
   font-family: 'Inter', sans-serif;
+}
+
+
+/* ===== PARTICLES ===== */
+.particle {
+  position: absolute;
+  top: -10px;
+  border-radius: 50%;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(120vh) rotate(360deg);
+    opacity: 0;
+  }
 }

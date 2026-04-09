@@ -11,7 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css?v=5" />
-  <link rel="icon" type="image/webp" href="v5_logo.webp">
+  <link rel="icon" type="image/webp" href="v5_logo.png">
 </head>
 
 <body class="course-page-body">
@@ -20,7 +20,7 @@
   <nav class="navbar scrolled" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="v5_logo.webp" alt="V5 Media School Logo">
+        <img src="v5_logo.png" alt="V5 Media School Logo">
       </a>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html#home" class="nav-link">Home</a></li>
@@ -41,7 +41,19 @@
         <li><a href="index.html#why-us" class="nav-link">Why Us</a></li>
         <li><a href="contact-us.html" class="nav-link">Contact</a></li>
       </ul>
-      <a href="index.html#contact" class="nav-cta" id="nav-enroll-btn">Enroll Now</a>
+      <div class="nav-dropdown" style="display: inline-block;">
+        <button class="nav-cta" style="display:flex; align-items:center; gap:4px; border:none; cursor:pointer; font-family:inherit;">
+          Enroll Now
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="dropdown-menu" style="right: 0; left: auto; min-width: 180px; margin-top: 15px;">
+          <a href="tel:+919391055552" class="dropdown-item">Call Now</a>
+          <a href="contact-us.html" class="dropdown-item">Apply for Free</a>
+          <a href="https://wa.me/919391055552" class="dropdown-item" target="_blank">WhatsApp</a>
+        </div>
+      </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -171,7 +183,7 @@
 
       <div class="footer-bottom">
         <div class="bottom-content">
-          <p>Â© 2025 V5 Media School. A V5 News Initiative.</p>
+          <p>Â2026 copy rights V5 media school</p>
           <div class="bottom-links">
             <a href="privacy-policy.html">Privacy Policy</a>
             <a href="terms-of-service.html">Terms of Service</a>
@@ -195,3 +207,5 @@
 </body>
 
 </html>
+
+
