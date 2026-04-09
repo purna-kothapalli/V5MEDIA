@@ -1,4 +1,4 @@
-// ===== NAVBAR SCROLL =====
+﻿// ===== NAVBAR SCROLL =====
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 60) navbar.classList.add('scrolled');
@@ -38,18 +38,31 @@ navLinks.querySelectorAll('a').forEach(link => {
   });
 });
 
-// ===== PARTICLES =====
+// ===== EXQUISITE PARTICLES =====
 (function createParticles() {
   const container = document.getElementById('particles');
   if (!container) return;
+  
+  // Embers
   for (let i = 0; i < 40; i++) {
     const p = document.createElement('div');
-    p.className = 'particle';
+    p.className = Math.random() > 0.4 ? 'ember' : 'ember dust';
+    
+    // Spawn mostly from bottom or randomly across screen
     p.style.left = Math.random() * 100 + 'vw';
-    p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
-    p.style.animationDuration = (Math.random() * 12 + 8) + 's';
+    p.style.top = (Math.random() * 40 + 60) + 'vh'; // Lower half mostly
+    
+    const size = Math.random() * 4 + 1;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    
+    p.style.animationDuration = (Math.random() * 8 + 6) + 's';
     p.style.animationDelay = (Math.random() * 10) + 's';
-    p.style.background = Math.random() > 0.5 ? '#FFD700' : '#e8192c';
+    
+    // Custom drift directions
+    p.style.setProperty('--dir-x', Math.random());
+    p.style.setProperty('--dir-y', Math.random() * 0.5 + 0.5); // mostly up
+    
     container.appendChild(p);
   }
 })();
@@ -470,4 +483,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
 
