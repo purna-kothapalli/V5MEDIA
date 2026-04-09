@@ -147,9 +147,7 @@ ul {
 .navbar.transparent-start:not(.scrolled) .nav-dropdown > button svg {
   stroke: rgba(255, 255, 255, 0.9);
 }
-.navbar.transparent-start:not(.scrolled) .nav-logo img {
-  filter: brightness(0) invert(1);
-}
+.navbar.transparent-start:not(.scrolled) .nav-logo img { filter: none; }
 .navbar.transparent-start:not(.scrolled) .nav-cta {
   background: rgba(255,255,255,0.1);
   color: #fff;
@@ -353,9 +351,11 @@ ul {
 .hero {
   padding: 170px 24px 80px;
   margin-top: -90px;
-  background: linear-gradient(135deg, #0a0000 0%, #3a0000 50%, #000000 100%);
-  background-size: 400% 400%;
-  animation: gradientBG 25s ease infinite;
+  background-color: #03010a;
+  background-image: 
+    radial-gradient(ellipse at 15% 45%, rgba(220, 20, 50, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 40%, rgba(20, 50, 220, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(20, 80, 255, 0.3) 0%, transparent 65%);
   min-height: calc(100vh - 116px);
   display: flex;
   align-items: center;
@@ -4021,32 +4021,27 @@ ul {
   z-index: 1;
 }
 
-.section-header::before, .acfm-header::before {
+.section-header::before, .acfm-header::before, .acfm-title::before, .page-header::before, .ch-title::before {
   content: "";
   position: absolute;
-  top: 45%;
+  top: 50%;
   left: 50%;
-  width: 130px;
-  height: 130px;
-  border: 4px solid rgba(0, 0, 0, 0.03);
-  transform: translate(-50%, -50%) rotate(15deg);
+  transform: translate(-50%, -50%);
+  width: 120vw;
+  height: 300px;
+  background-image: 
+    linear-gradient(rgba(45, 200, 150, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 200, 150, 0.15) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: center;
   z-index: -1;
   pointer-events: none;
-  border-radius: 12px;
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 65%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 65%);
 }
 
 .section-header::after, .acfm-header::after {
-  content: "";
-  position: absolute;
-  top: 35%;
-  left: 52%;
-  width: 90px;
-  height: 90px;
-  background: rgba(0, 0, 0, 0.02);
-  transform: translate(-50%, -50%) rotate(40deg);
-  z-index: -1;
-  pointer-events: none;
-  border-radius: 16px;
+  display: none !important;
 }
 
 /* 2. Glowing shadow overlay for all cards, borderless, border-radius */
@@ -4097,4 +4092,16 @@ ul {
 
 .t-card:hover::after {
   color: rgba(220, 20, 60, 0.07);
+}
+
+.footer-logo-img {
+  height: 60px;
+  width: auto;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.acfm-title, .page-header, .ch-title {
+  position: relative;
+  z-index: 1;
 }
