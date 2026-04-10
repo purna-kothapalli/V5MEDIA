@@ -1,4 +1,4 @@
-﻿// ===== NAVBAR SCROLL =====
+// ===== NAVBAR SCROLL =====
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 60) navbar.classList.add('scrolled');
@@ -98,15 +98,16 @@ document.querySelectorAll('.hero-stats, .about-dark-panel').forEach(section => {
 
 
 // ===== EMAILJS CONFIGURATION (Primary: Internal Notifications) =====
-const NOTIF_SERVICE_ID = 'service_imjfbzy';
-const NOTIF_TEMPLATE_ADMISSION = 'template_1k2lr6r';
-const NOTIF_TEMPLATE_ENQUIRY = 'template_zor0w5x';
+const NOTIF_SERVICE_ID = 'service_g79i3us';
+const NOTIF_PUBLIC_KEY = 'au-8-n_TEjnF6NVBa';
+const NOTIF_TEMPLATE_ADMISSION = 'template_qotht0m';
+const NOTIF_TEMPLATE_ENQUIRY = 'template_q3lonpk';
 
 // ===== EMAILJS CONFIGURATION (Secondary: User Auto-Replies) =====
-const AUTO_SERVICE_ID = 'service_xnhurja';
-const AUTO_PUBLIC_KEY = 'tozIcCpMA9VMazNu7';
-const AUTO_TEMPLATE_ADMISSION = 'template_66jvxzp';
-const AUTO_TEMPLATE_ENQUIRY = 'template_ttz85m6';
+const AUTO_SERVICE_ID = 'service_vxmsmkd';
+const AUTO_PUBLIC_KEY = 'fL75wbOsFvyZAk9Bf';
+const AUTO_TEMPLATE_ADMISSION = 'template_prmfxh5';
+const AUTO_TEMPLATE_ENQUIRY = 'template_yf72vte';
 
 // ===== ADMISSION FORM =====
 const contactForm = document.getElementById('contact-form');
@@ -174,7 +175,9 @@ if (contactForm) {
     btn.disabled = true;
 
     // 1. Send Notification to Admin (Primary Service)
-    emailjs.sendForm(NOTIF_SERVICE_ID, NOTIF_TEMPLATE_ADMISSION, this)
+    emailjs.sendForm(NOTIF_SERVICE_ID, NOTIF_TEMPLATE_ADMISSION, this, {
+      publicKey: NOTIF_PUBLIC_KEY
+    })
       .then(() => {
         // Show success UI early for responsiveness
         btn.style.display = 'none';
@@ -269,7 +272,9 @@ if (enquiryForm) {
     btn.disabled = true;
 
     // 1. Send Notification to Admin (Primary Service)
-    emailjs.sendForm(NOTIF_SERVICE_ID, NOTIF_TEMPLATE_ENQUIRY, this)
+    emailjs.sendForm(NOTIF_SERVICE_ID, NOTIF_TEMPLATE_ENQUIRY, this, {
+      publicKey: NOTIF_PUBLIC_KEY
+    })
       .then(() => {
         // Show success UI early
         btn.style.display = 'none';
